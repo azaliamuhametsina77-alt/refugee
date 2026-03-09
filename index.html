@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Карта вынужденного перемещения</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.19.0/dist/maplibre-gl.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="map"></div>
+
+    <aside class="panel controls-panel" aria-label="Управление картой">
+      <div class="panel-title">Категория</div>
+      <div id="categoryButtons" class="button-group tabs"></div>
+
+      <div class="panel-title panel-title--spaced">Страна происхождения</div>
+      <div id="countryAllButton" class="country-all"></div>
+      <div id="countryButtons" class="button-group country-grid"></div>
+
+      <div class="method-note">
+        Карта показывает совокупную численность людей на каждом направлении за год, а не поток новых прибытий.
+      </div>
+    </aside>
+
+    <aside id="hoverCard" class="panel hover-card is-empty" aria-live="polite">
+      <div class="eyebrow">Наведите или нажмите на линию</div>
+      <div class="route">Страна происхождения → страна приёма</div>
+      <div class="metric-row">
+        <span id="metricLabel">Численность</span>
+        <span id="metricValue">—</span>
+      </div>
+    </aside>
+
+    <aside class="panel slider-panel" aria-label="Фильтр по году">
+      <div class="year-readout" id="yearReadout">2025</div>
+      <div class="slider-wrap">
+        <input id="yearSlider" type="range" min="0" max="10" step="1" value="10" />
+      </div>
+    </aside>
+
+    <aside class="panel legend-panel" aria-label="Легенда">
+      <div class="panel-title">Толщина линии</div>
+      <div class="legend-item">
+        <span class="legend-line legend-line--thin"></span>
+        <span>Меньшая численность</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-line legend-line--mid"></span>
+        <span>Средняя</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-line legend-line--thick"></span>
+        <span>Большая</span>
+      </div>
+    </aside>
+
+    <div id="status" class="status">Загрузка данных…</div>
+  </div>
+
+  <script src="https://unpkg.com/maplibre-gl@5.19.0/dist/maplibre-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
