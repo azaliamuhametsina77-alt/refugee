@@ -42,12 +42,16 @@ const yearReadout = document.getElementById('yearReadout');
 const yearSlider = document.getElementById('yearSlider');
 const sliderTicks = document.getElementById('sliderTicks');
 const statusEl = document.getElementById('status');
+const controlsPanel = document.getElementById('controlsPanel');
+const controlsBody = document.getElementById('controlsBody');
+const controlsToggle = document.getElementById('controlsToggle');
 
 let map;
 let featureByKey = new Map();
 
 async function init() {
   localizeStaticUI();
+  setupControlsCollapse();
   buildCategoryButtons();
   buildCountryButtons();
   buildYearSlider();
@@ -127,6 +131,17 @@ function localizeStaticUI() {
     sliderTicks.innerHTML = '';
     sliderTicks.style.display = 'none';
   }
+}
+
+function setupControlsCollapse() {
+  if (!controlsPanel || !controlsToggle) return;
+
+  controlsToggle.addEventListener('click', () => {
+    const isCollapsed = controlsPanel.classList.toggle('is-collapsed');
+
+    controlsToggle.textContent = isCollapsed ? 'Показать панель' : 'Скрыть панель';
+    controlsToggle.setAttribute('aria-expanded', String(!isCollapsed));
+  });
 }
 
 function createMap() {
